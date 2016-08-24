@@ -1,0 +1,31 @@
+## Production
+
+version: '2'
+services:
+  devadictos-db:
+    build:
+      context: ./
+      dockerfile: Dockerfile.db
+    container_name: 'devadictos-db'
+    ports:
+      - "3306:3306"
+
+  devadictos-app:
+    build:
+      context: ./
+      dockerfile: Dockerfile.app
+    container_name: 'devadictos-app'
+    ports:
+      - "9000:9000"
+    links:
+      - devadictos-db:db
+
+  devadictos-nginx:
+    build:
+      context: ./
+      dockerfile: Dockerfile.nginx
+    container_name: 'devadictos-server'
+    ports:
+      - "80:80"
+    links:
+      - devadictos-app:devadictos
