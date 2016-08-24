@@ -1,0 +1,12 @@
+FROM mysql
+MAINTAINER Lubert Palacios  <trepafi@gmail.com>
+
+#ENV MYSQL_DATABASE  devactictos
+ENV MYSQL_USER      lubert
+ENV MYSQL_PASSWORD  never_use_hardcoded_passwords
+
+CMD ["mysqld"]
+
+#ADD ./mysql/backup.sql /docker-entrypoint-initdb.d/
+
+EXPOSE 3306

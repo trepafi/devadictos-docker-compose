@@ -1,0 +1,11 @@
+FROM nginx
+
+RUN apt-get update && \
+    apt-get install -y python-setuptools && \
+    easy_install j2cli && \
+    apt-get purge -y --auto-remove && rm -rf /var/lib/apt/lists/*
+
+ADD symfony-app.conf /etc/nginx/conf.d/
+
+CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 80 443
